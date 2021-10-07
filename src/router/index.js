@@ -23,51 +23,81 @@ const routes = [
       {
         path: "/",
         name: "side-menu-dashboard",
+        meta: {
+          title: '统计数据'
+        },
         component: Dashboard
       },
       {
         path: "write",
         name: "side-menu-write",
+        meta: {
+          title: '编写文章'
+        },
         component: Write
       },
       {
         path: "addMajorCategory",
         name: "side-menu-add-major-category",
+        meta: {
+          title: '新增主分类'
+        },
         component: AddMajorCategory
       },
       {
         path: "majorCategory",
         name: "side-menu-major-category",
+        meta: {
+          title: '文章主分类'
+        },
         component: MajorCategory
       },
       {
         path: "addSecondaryCategory",
         name: "side-menu-add-secondary-category",
+        meta: {
+          title: '新增次分类'
+        },
         component: AddSecondaryCategory
       },
       {
         path: "secondaryCategory",
         name: "side-menu-secondary-category",
+        meta: {
+          title: '文章次分类'
+        },
         component: SecondaryCategory
       },
       {
         path: "addAuthor",
         name: "side-menu-add-author",
+        meta: {
+          title: '添加作者'
+        },
         component: AddAuthor
       },
       {
         path: "authors",
         name: "side-menu-authors",
+        meta: {
+          title: '作者管理'
+        },
         component: Authors
       },
       {
         path: "profile",
         name: "side-menu-profile",
+        meta: {
+          title: '用户信息'
+        },
         component: Profile
       },
       {
         path: "article",
         name: "side-menu-article",
+        meta: {
+          title: '文章管理'
+        },
         component: Article
       },
       {
@@ -112,7 +142,14 @@ router.beforeEach((to, from) => {
   }
 
   if (to.name == 'login' && store.state.user.token && store.state.user.userInfo) {
-    return { replace: true, name: 'side-menu-dashboard' }
+    if(store.state.user.userInfo.permission > 1){
+      return { replace: true, name: 'side-menu-profile' }
+    }else{
+      return { replace: true, name: 'side-menu-dashboard' }
+    }
+  }
+  if (to.name == 'side-menu-dashboard' && store.state.user.userInfo.permission > 1) {
+    return { replace: true, name: 'side-menu-profile' }
   }
 })
 

@@ -3,6 +3,7 @@ import { networkConfig } from './networkConfig'; //此路径为配置代理服�
 import { toast } from '../plugins/toast';
 import router from '../router';
 import store from '../store';
+import qs from 'qs';
 
 function requestService(config) {
   const instance = axios.create({
@@ -12,8 +13,8 @@ function requestService(config) {
 
   // request拦截器
   instance.interceptors.request.use(config => {
-    let token = localStorage.getItem('token')||sessionStorage.getItem('token')||'';
-    if(token){
+    let token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
+    if (token) {
       config.headers.authorization = token;
     }
     console.log('请求接口：' + config.url);
@@ -31,10 +32,11 @@ function requestService(config) {
     return res.data.data;
   },
     error => {
-      if(error.response.status==401){
+      console.log(error)
+      if (error.response.status == 401) {
         store.commit('user/clearToken');
-        router.replace({name:'login'});
-      }else{
+        router.replace({ name: 'login' });
+      } else {
         toast.danger(error.response.data.msg);
       }
       return Promise.reject(error)
@@ -53,7 +55,10 @@ export function get(url, params, responseType) {
   })
 }
 
-export function post(url, data, headers ,responseType) { // url: 接口；路径；data: 请求参数；responseType：相应的数据类型，不传默认为json
+export function post(url, data, headers, responseType) { // url: 接口；路径；data: 请求参数；responseType：相应的数据类型，不传默认为json
+  if (url != '/upload/avatar'&&url != '/upload/article') {
+    data = qs.stringify(data);
+  }
   return requestService({
     method: 'post',
     url,

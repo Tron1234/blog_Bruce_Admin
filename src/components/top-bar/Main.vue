@@ -2,10 +2,11 @@
   <!-- BEGIN: Top Bar -->
   <div class="top-bar">
     <!-- BEGIN: Breadcrumb -->
-    <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
-      <a href="">Application</a>
-      <ChevronRightIcon class="breadcrumb__icon" />
-      <a href="" class="breadcrumb--active">Dashboard</a>
+    <div class="-intro-x flex mr-auto">
+      <div class="breadcrumb" v-for="(item,index) of routeLink" :key="index">
+        <a :class="{'breadcrumb--active':index==routeLink.length-1}">{{item}}</a>
+        <ChevronRightIcon v-if="index!=routeLink.length-1" class="breadcrumb__icon" />
+      </div>
     </div>
     <!-- END: Breadcrumb -->
     <!-- BEGIN: Account Menu -->
@@ -44,21 +45,31 @@
 <script>
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
 import { logout } from '@/apis';
 export default defineComponent({
   setup() {
     const store = useStore();
     const router = useRouter();
-    const searchDropdown = ref(false);
-
-    const showSearchDropdown = () => {
-      searchDropdown.value = true;
-    };
-
-    const hideSearchDropdown = () => {
-      searchDropdown.value = false;
-    };
+    //定义路由展示
+    const routeLink = ref([]);
+    const route = useRoute();
+    const routes = route.matched.slice(1);
+    if (routes.length) {
+      if (route.path.toLowerCase().indexOf('category') != -1) {
+        routes.unshift({ meta: { title: '文章分类' } });
+      }
+      routeLink.value = routes.map(item => item.meta.title)
+    }
+    onBeforeRouteUpdate((to) => {
+      const routes = to.matched.slice(1);
+      if (routes.length) {
+        if (to.path.toLowerCase().indexOf('category') != -1) {
+          routes.unshift({ meta: { title: '文章分类' } });
+        }
+        routeLink.value = routes.map(item => item.meta.title)
+      }
+    });
 
     async function loginOut() {
       await logout();
@@ -66,11 +77,9 @@ export default defineComponent({
       router.replace({ name: 'login' });
     }
     return {
-      searchDropdown,
-      showSearchDropdown,
-      hideSearchDropdown,
       userInfo: computed(() => store.state.user.userInfo),
-      loginOut
+      loginOut,
+      routeLink
     };
   }
 });

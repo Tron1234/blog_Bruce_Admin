@@ -26,8 +26,7 @@
                   正文
                 </div>
                 <div class="mt-5">
-                  <v-md-editor v-model="content" height="500px" />
-                  <!-- <CKEditor v-model="editorData" :editor="classicEditor" :config="editorConfig" /> -->
+                  <v-md-editor mode="edit" v-model="content" :disabled-menus="[]" height="500px" @change="getSimpleContent" @upload-image="handleUploadImage" />
                 </div>
               </div>
               <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
@@ -48,7 +47,7 @@
 
 <script>
 import { defineComponent, getCurrentInstance, ref, reactive, toRaw, toRefs } from "vue";
-import { getSecondaryCategory, addArticle, getArticleInfo, updateArticle } from "@/apis";
+import { getSecondaryCategory, addArticle, getArticleInfo, updateArticle, uploadArticle } from "@/apis";
 import { useRouter, useRoute } from 'vue-router';
 export default defineComponent({
   setup() {
@@ -64,6 +63,7 @@ export default defineComponent({
     const data = reactive({
       title: '',
       content: '',
+      simpleContent: '',
       secondaryCategoryId: '-1'
     })
 
@@ -78,6 +78,9 @@ export default defineComponent({
         return app.$toast.danger("请输入标题！");
       }
       if (!data.content) {
+        return app.$toast.danger("请输入内容！");
+      }
+      if (!data.simpleContent) {
         return app.$toast.danger("请输入内容！");
       }
       if (!Number(data.secondaryCategoryId)) {
@@ -107,6 +110,7 @@ export default defineComponent({
       data.id = preData.id;
       data.title = preData.title;
       data.content = preData.content;
+      data.simpleContent = preData.simpleContent;
       data.secondaryCategoryId = preData.secondaryCategoryId;
     }
 
@@ -115,7 +119,25 @@ export default defineComponent({
       data.id = preData.id;
       data.title = preData.title;
       data.content = preData.content;
+      data.simpleContent = preData.simpleContent;
       data.secondaryCategoryId = preData.secondaryCategoryId;
+    }
+
+    function getSimpleContent(text, html) {
+      data.simpleContent = html;
+    }
+
+    async function handleUploadImage(event, insertImage, files) {
+      let formData = new FormData();
+      formData.append('picture', files[0]);
+      let url = await uploadArticle(formData);
+      // 此处只做示例
+      insertImage({
+        url,
+        desc: '文章图片',
+        width: '300',
+        height: 'auto',
+      });
     }
 
     if (route.query.id) {
@@ -128,6 +150,8 @@ export default defineComponent({
       showReset: !!route.query.id,
       submitArticle,
       resetArticle,
+      getSimpleContent,
+      handleUploadImage,
       ...toRefs(data)
     };
   }

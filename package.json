@@ -47,6 +47,7 @@
     "js-beautify": "^1.13.5",
     "litepicker": "^2.0.6",
     "mosha-vue-toastify": "^1.0.21",
+    "qs": "^6.10.1",
     "tabulator-tables": "^4.9.3",
     "tail.select": "^0.5.15",
     "tiny-slider": "^2.9.2",
