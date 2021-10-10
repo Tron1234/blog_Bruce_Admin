@@ -6,7 +6,7 @@
         <div class="w-full sm:w-auto flex justify-between mb-4" v-if="userInfo.permission>1">
           <button class="btn btn-primary shadow-md mr-2 whitespace-nowrap" @click="addArticle">新增文章
             <PlusIcon class="w-5 h-5 ml-1" />
-          </button>status
+          </button>
           <select class="w-40 form-select form-select-lg ml-4" aria-label=".form-select-lg example" v-model="page.status" @change="articleList">
             <option value="1">已发布</option>
             <option value="0">已保存</option>

@@ -20,16 +20,16 @@
         <input type="text" class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13" placeholder="标题" v-model="title" />
         <div class="post intro-y overflow-hidden box mt-5">
           <div class="post__content tab-content">
-            <div id="content" class="tab-pane p-5 active" role="tabpanel" aria-labelledby="content-tab">
-              <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5">
-                <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
+            <div id="content" class="tab-pane sm:p-5 active" role="tabpanel" aria-labelledby="content-tab">
+              <div class="md:border border-gray-200 dark:border-dark-5 md:rounded-md md:p-5">
+                <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 p-5 sm:p-0 sm:pb-5">
                   正文
                 </div>
-                <div class="mt-5">
+                <div class="sm:mt-5 overflow-hidden sm:overflow-visible">
                   <v-md-editor mode="edit" v-model="content" :disabled-menus="[]" height="500px" @change="getSimpleContent" @upload-image="handleUploadImage" />
                 </div>
               </div>
-              <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
+              <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 sm:mt-5">
                 <label for="post-form-3" class="form-label">次分类</label>
                 <select id="post-form-3" class="form-select" v-model="secondaryCategoryId" aria-label="Default select example">
                   <option value="-1">请选择次分类</option>

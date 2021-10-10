@@ -14,7 +14,7 @@ import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
 import Prism from 'prismjs';
 
 VueMarkdownEditor.use(vuepressTheme, {
-  Prism,
+  Prism
 });
 import "./assets/js/tw-starter";
 
