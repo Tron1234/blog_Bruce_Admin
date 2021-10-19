@@ -1,18 +1,18 @@
 <template>
   <div>
     <h2 class="intro-y text-lg font-medium mt-5">文章主分类</h2>
-    <div class="grid grid-cols-3 gap-6 mt-5">
-      <div class="intro-y col-span-3 flex flex-wrap justify-between items-center">
-        <button class="btn btn-primary shadow-md mr-2 mb-3" @click="addCategory">新增分类
-          <PlusIcon class="w-5 h-5  ml-1" />
-        </button>
-        <div class="mb-3">
-          <div class="w-56 relative text-gray-700 dark:text-gray-300">
-            <input type="text" class="form-control w-56 box pr-10 placeholder-theme-13" placeholder="搜索分类" v-model="page.searchKey" @input="inputCategory" />
-            <SearchIcon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" />
-          </div>
+    <div class="intro-y flex flex-wrap justify-between items-center mt-5">
+      <button class="btn btn-primary shadow-md mr-2 mb-3" @click="addCategory">新增分类
+        <PlusIcon class="w-5 h-5  ml-1" />
+      </button>
+      <div class="mb-3">
+        <div class="w-56 relative text-gray-700 dark:text-gray-300">
+          <input type="text" class="form-control w-56 box pr-10 placeholder-theme-13" placeholder="搜索分类" v-model="page.searchKey" @input="inputCategory" />
+          <SearchIcon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" />
         </div>
       </div>
+    </div>
+    <div class="grid grid-cols-3 mt-4">
       <!-- BEGIN: Data List -->
       <div class="intro-y col-span-3 overflow-auto lg:overflow-visible -mt-6">
         <table class="table table-report">
@@ -50,7 +50,7 @@
       </div>
       <!-- END: Data List -->
       <!-- BEGIN: Pagination -->
-      <div v-if="pageTotal>1" class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
+      <div v-if="pageTotal>1" class="intro-y col-span-12 mt-4 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
         <ul class="pagination">
           <li @click="pageTo('first')">
             <span class="pagination__link">
