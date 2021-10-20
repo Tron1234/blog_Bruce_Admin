@@ -1,20 +1,20 @@
 <template>
   <div>
-    <div class="intro-y flex items-center mt-5">
-      <h2 class="text-lg font-medium whitespace-nowrap mr-auto">编写文章</h2>
-      <div class="w-full sm:w-auto flex">
-        <button v-if="showReset" class="btn btn-danger mr-4" @click="resetArticle">
+    <div class="intro-y flex flex-wrap items-center mt-3">
+      <h2 class="text-lg font-medium whitespace-nowrap mr-auto mb-3">编写文章</h2>
+      <div class="w-full sm:w-auto flex mb-3">
+        <button v-if="showReset" class="btn btn-danger mr-4 whitespace-nowrap" @click="resetArticle">
           <RotateCwIcon class="w-4 h-4 mr-1" />重置
         </button>
-        <button class="btn box text-gray-700 dark:text-gray-300 mr-3 flex items-center ml-auto sm:ml-0" @click="submitArticle('save')">
+        <button class="whitespace-nowrap btn box text-gray-700 dark:text-gray-300 mr-3 flex items-center ml-auto sm:ml-0" @click="submitArticle('save')">
           <SaveIcon class="w-4 h-4 mr-1" />保存
         </button>
-        <button class="dropdown-toggle btn btn-primary shadow-md flex items-center" @click="submitArticle('publish')">
+        <button class="whitespace-nowrap dropdown-toggle btn btn-primary shadow-md flex items-center" @click="submitArticle('publish')">
           <UploadCloudIcon class="w-4 h-4 mr-1" />发布
         </button>
       </div>
     </div>
-    <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
+    <div class="pos intro-y grid grid-cols-12 gap-5 mt-2">
       <!-- BEGIN: Post Content -->
       <div class="intro-y col-span-12">
         <input type="text" class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13" placeholder="标题" v-model="title" />
