@@ -24,7 +24,7 @@
     <div class="intro-y grid grid-cols-12 gap-6 mt-3">
       <!-- BEGIN: Blog Layout -->
       <div v-for="(item,index) in list" :key="index" class="relative flex flex-col justify-between intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
-        <img class="absolute top-0 left-0 w-10 object-contain" v-if="userInfo.permission>1" src="@/assets/images/recommend.svg" />
+        <img class="absolute top-0 left-0 w-10 object-contain" v-if="item.recommond" src="@/assets/images/recommend.svg" />
         <div class="flex items-center justify-between">
           <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
             <div class="w-10 h-10 flex-none image-fit">
