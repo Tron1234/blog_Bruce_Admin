@@ -83,7 +83,7 @@ export default defineComponent({
       if (!data.simpleContent) {
         return app.$toast.danger("请输入内容！");
       }
-      if (!Number(data.secondaryCategoryId)) {
+      if (!Number(data.secondaryCategoryId) || Number(data.secondaryCategoryId) < 0) {
         return app.$toast.danger("请选择次分类！");
       }
       let status = type == 'publish';
