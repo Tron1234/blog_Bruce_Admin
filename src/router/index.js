@@ -11,6 +11,7 @@ import Authors from "../views/authors/Main.vue";
 import AddAuthor from "../views/add-author/Main.vue";
 import ErrorPage from "../views/error-page/Main.vue";
 import Profile from "../views/profile/Main.vue";
+import Contact from "../views/contact/Main.vue";
 import Article from "../views/article/Main.vue";
 import Login from "../views/login/Main.vue";
 import Chart from "../views/chart/Main.vue";
@@ -83,6 +84,14 @@ const routes = [
           title: '作者管理'
         },
         component: Authors
+      },
+      {
+        path: "contact",
+        name: "side-menu-contact",
+        meta: {
+          title: '留言'
+        },
+        component: Contact
       },
       {
         path: "profile",

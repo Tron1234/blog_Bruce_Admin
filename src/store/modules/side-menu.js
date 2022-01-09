@@ -34,6 +34,11 @@ const adminMenu = [
     ]
   },
   {
+    icon: "MessageCircleIcon",
+    pageName: "side-menu-contact",
+    title: "留言"
+  },
+  {
     icon: "UserIcon",
     pageName: "side-menu-profile",
     title: "用户信息"
@@ -55,7 +60,7 @@ submenu.subMenu = [
   }
 ]
 
-const authorMenu = [submenu, adminMenu[4]];
+const authorMenu = [submenu, adminMenu.slice(-1)[0]];
 const state = () => {
   return {
     menu: user.state.userInfo.permission == 1 ? adminMenu : authorMenu
