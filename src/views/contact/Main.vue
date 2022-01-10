@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid grid-cols-12 gap-6 mt-5">
+    <div v-if="list.length" class="grid grid-cols-12 gap-6 mt-5">
       <!-- BEGIN: Users Layout -->
       <div v-for="(item,index) in list" :key="index" class="intro-y col-span-12 md:col-span-6 lg:col-span-4">
         <div class="box">
@@ -52,11 +52,14 @@
       </div>
       <!-- END: Pagination -->
     </div>
+    <div v-else class="text-gray-600 text-center text-lg my-6">
+      暂无留言
+    </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, getCurrentInstance, ref, reactive, toRaw, toRefs } from "vue";
+import { defineComponent, getCurrentInstance, ref, reactive, toRaw } from "vue";
 import { deleteContact, getMessage } from "@/apis";
 export default defineComponent({
   setup() {
@@ -110,7 +113,7 @@ export default defineComponent({
       }
     }
 
-    function deleteMessage(id){
+    function deleteMessage(id) {
       app.$message.dangerMessage({
         content: '确定删除该条留言?',
         success: async () => {
