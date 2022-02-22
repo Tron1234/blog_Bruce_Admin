@@ -1,10 +1,10 @@
 # blog_Bruce_Admin
 
 ***English***
-My Blog admin address http://81.71.149.135/Admin
+My Blog admin address http://81.71.149.135/admin
 
 ***中文***
-这是我的blog管理地址 http://81.71.149.135/Admin
+这是我的blog管理地址 http://81.71.149.135/admin
 
 ## Build Setup
 
