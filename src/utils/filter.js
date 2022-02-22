@@ -4,14 +4,15 @@ const install = app => {
       return Number(value) ? '女' : '男';
     },
     formatDate(date, fmt = "YYYY-mm-dd HH:MM") {
+      const time = new Date(date);
       let ret;
       const opt = {
-        "Y+": date.getFullYear().toString(), // 年
-        "m+": (date.getMonth() + 1).toString(), // 月
-        "d+": date.getDate().toString(), // 日
-        "H+": date.getHours().toString(), // 时
-        "M+": date.getMinutes().toString(), // 分
-        "S+": date.getSeconds().toString() // 秒
+        "Y+": time.getFullYear().toString(), // 年
+        "m+": (time.getMonth() + 1).toString(), // 月
+        "d+": time.getDate().toString(), // 日
+        "H+": time.getHours().toString(), // 时
+        "M+": time.getMinutes().toString(), // 分
+        "S+": time.getSeconds().toString() // 秒
         // 有其他格式化字符需求可以继续添加，必须转化成字符串
       };
       for (let k in opt) {
