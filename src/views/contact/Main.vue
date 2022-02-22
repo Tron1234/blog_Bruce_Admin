@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="flex justify-between items-center py-3 px-5 border-t border-gray-200 dark:border-dark-5">
-            <span>{{$filter.formatDate(item.time)}}</span>
+            <span>{{formatTime(item.time)}}</span>
             <button class="btn btn-danger py-1 px-4" @click="deleteMessage(item.id)">删除</button>
           </div>
         </div>
@@ -132,6 +132,7 @@ export default defineComponent({
       list,
       pageTotal,
       page,
+      formatTime: computed(() => ((date) => dayjs(date).format('YYYY-MM-DD HH:mm'))),
       pageTo,
       deleteMessage
     };
