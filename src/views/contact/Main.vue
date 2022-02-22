@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="flex justify-between items-center py-3 px-5 border-t border-gray-200 dark:border-dark-5">
-            <span>{{item.time}}</span>
+            <span>{{$filter.formatDate(item.time)}}</span>
             <button class="btn btn-danger py-1 px-4" @click="deleteMessage(item.id)">删除</button>
           </div>
         </div>
