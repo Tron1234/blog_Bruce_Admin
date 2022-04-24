@@ -72,6 +72,7 @@ export default defineComponent({
     });
 
     async function loginOut() {
+      document.querySelector('.intro-x.dropdown>.dropdown-toggle').click();
       await logout();
       store.commit("user/clearToken");
       router.replace({ name: 'login' });
